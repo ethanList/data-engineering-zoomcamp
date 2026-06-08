@@ -1,0 +1,55 @@
+services:
+  pgdatabase:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=ny_taxi
+    volumes:
+      - ny_taxi_postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+      - PGADMIN_CONFIG_PROXY_X_HOST_COUNT=1
+      - PGADMIN_CONFIG_PROXY_X_PREFIX_COUNT=1
+      - PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION=False
+      - PGADMIN_CONFIG_WTF_CSRF_CHECK_DEFAULT=False
+      - PGADMIN_CONFIG_WTF_CSRF_ENABLED=False
+      - PGADMIN_CONFIG_SESSION_COOKIE_SAMESITE='None'
+      - PGADMIN_CONFIG_SESSION_COOKIE_SECURE=True
+    volumes:
+      - ny_taxi_postgres_data:/var/lib/postgresql
+    ports:
+      - "8085:80"
+    depends_on:
+      - pgdatabase
+
+  taxi_ingest:
+    image: taxi_ingest:v001
+    command: >
+      --pg-user=root
+      --pg-pass=root
+      --pg-host=pgdatabase
+      --pg-port=5432
+      --pg-db=ny_taxi
+      --target-table=yellow_taxi_trips_2021_1
+      --year=2021
+      --month=1
+      --chunksize=10000
+    depends_on:
+      - pgdatabase
+    networks:
+      - pg-network
+
+networks:
+  pg-network:
+    driver: bridge
+
+volumes:
+  ny_taxi_postgres_data:
+  pgadmin_data:
