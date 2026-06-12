@@ -9,17 +9,17 @@ terraform {
 
 provider "google" {
   #credentials being auto picked up 
-  project = "terraform-demo-499022"
-  region  = "us-central1"
+  project = var.project
+  region  = var.region
 }
 
 
 
 resource "google_storage_bucket" "demo-bucket" {
-  name          = "terraform-demo-499022-terra-bucket"
-  location      = "US"
+  name                        = var.gcs_bucket_name
+  location                    = var.location
   uniform_bucket_level_access = true
-  force_destroy = true
+  force_destroy               = true
 
   lifecycle_rule {
     condition {
@@ -30,3 +30,11 @@ resource "google_storage_bucket" "demo-bucket" {
     }
   }
 }
+
+
+
+resource "google_bigquery_dataset" "demo_dataset" {
+  dataset_id = var.bq_dataset_name
+  location = var.location
+
+} 
