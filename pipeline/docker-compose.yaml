@@ -16,7 +16,7 @@ networks:
 
 services:
   pgdatabase:
-    image: postgres:13
+    image: postgres:15
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
@@ -67,7 +67,7 @@ services:
       - pg-network
 
   kestra_postgres:
-    image: postgres:13
+    image: postgres:18
     volumes:
       - kestra_postgres_data:/var/lib/postgresql
     environment:
