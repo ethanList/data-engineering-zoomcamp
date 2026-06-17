@@ -1,4 +1,10 @@
 *.parquet
+.terraform/
+*.tfstate
+*.tfstate.*
+gcp-key.json
+*-key.json
+*credentials*.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
