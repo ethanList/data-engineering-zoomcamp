@@ -1,6 +1,6 @@
 variable "project" {
   description = "Project"
-  default     = "terraform-demo-499022"
+  default     = "module-3-project-ethan"
 }
 
 variable region {
@@ -21,7 +21,7 @@ variable "bq_dataset_name" {
 
 variable "gcs_bucket_name" {
   description = "My Storage Bucket Name"
-  default     = "terraform-demo-499022-terra-bucket"
+  default     = "module-3-project-ethan-terra-bucket"
 }
 
 
