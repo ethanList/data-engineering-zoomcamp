@@ -38,3 +38,8 @@ resource "google_bigquery_dataset" "demo_dataset" {
   location = var.location
 
 } 
+
+resource "google_bigquery_dataset" "nytaxi_dataset" {
+  dataset_id = var.bq_dataset_name_nytaxi
+  location   = var.location
+}

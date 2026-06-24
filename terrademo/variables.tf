@@ -30,3 +30,7 @@ variable "gcs_storage_class" {
   default     = "STANDARD"
 }
 
+variable "bq_dataset_name_nytaxi" {
+  description = "BigQuery Dataset for dbt module"
+  default     = "nytaxi"
+}
