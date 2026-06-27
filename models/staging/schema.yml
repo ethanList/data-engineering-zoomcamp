@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: staging
+    database: module-3-project-ethan
+    schema: nytaxi
+    tables:
+      - name: green_tripdata
+      - name: yellow_tripdata
