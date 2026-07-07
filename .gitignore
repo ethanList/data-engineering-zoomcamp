@@ -1,4 +1,6 @@
-data/*.csv
+data/
+fhvhv/
+*.csv
 *.csv.gz
 *.parquet
 .terraform/
